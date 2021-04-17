@@ -102,7 +102,7 @@ client.on('message', async(message) => {
 	
 	if (command.toLowerCase() === 'tag'){
 		if (subcommand.toLowerCase() === 'add'){
-			if (client.commands.size === 50){
+			if (client.commands.size === 100){
 				return message.reply('The Tags list is full, please delete some of the tags before you can add one.');
 			} else if (!tagname){
 				return message.reply('Please specify the tagname to add')
