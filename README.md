@@ -71,7 +71,7 @@ To make a tag ephemeral or not, use the command `tag edit [name of the tag] ephe
 *This does not work with Message Embed responses*
 
 ## Limitations
-* Number of tags cannot exceed 50.
+* Number of tags cannot exceed 100.
 * Tag Description must not exceed 100 characters.
 
 ## Commands list
