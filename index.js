@@ -115,7 +115,7 @@ client.on('message', async(message) => {
 				const document = await database.findById(message.guild.id) || new database({ _id: message.guild.id });
 				const TAG_INST = new GuildTag({ name: tagname.toLowerCase() });
 				try {
-					const parsed = JSON.parse(JSON.stringify(parameter.join(' ')));
+					const parsed = JSON.parse(response);
 					TAG_INST.response_content = new MessageEmbed(parsed.embed || parsed);
 				} catch (err){
 					TAG_INST.response_content = parameter.join(' ');
@@ -150,7 +150,7 @@ client.on('message', async(message) => {
 					    const parsed = JSON.parse(parameter.slice(1).join(' '));
 					    TAG_INST['response_content'] = new MessageEmbed(parsed.embed || parsed);
 					} catch (err) {
-						TAG_INST['response_content'] = parameter.slice(1).join(' ');
+					    TAG_INST['response_content'] = parameter.slice(1).join(' ');
 					};
 					TAG_INST.response_type = typeof TAG_INST.response_content === 'object' ? 'embed' : 'text';
 				} else if (parameter[0] === 'description'){
