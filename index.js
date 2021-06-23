@@ -15,22 +15,22 @@ const database = mongoose.model('guildtags', mongoose.Schema({
 
 class GuildTag{
 	constructor(data = {}){
-		this.name = data.name;
-		this.description = data.description;
-		this.ephemeral = data.ephemeral;
-		this.response_type = data.response_type;
+		this.name             = data.name;
+		this.description      = data.description;
+		this.ephemeral        = data.ephemeral;
+		this.response_type    = data.response_type;
 		this.response_content = data.response_content;
-		this.response_author = data.response_author;
+		this.response_author  = data.response_author;
 	};
 };
 
 mongoose.connect(process.env.MONGO_URI, {
 	useUnifiedTopology: true,
-    connectTimeoutMS: 10000,
-    useNewUrlParser: true,
-    autoIndex: false,
-    poolSize: 5,
-    family: 4
+	connectTimeoutMS  : 10000,
+	useNewUrlParser   : true,
+	autoIndex         : false,
+	poolSize          : 5,
+	family            : 4
 });
 
 mongoose.set('useFindAndModify', false);
@@ -72,11 +72,11 @@ Structures.extend('Message', DJSMessage => class Message extends DJSMessage{
         Object.assign(apiMessage.data, { message_reference: { message_id: this.id } });
 
         if (!apiMessage.data.allowed_mentions || Object.keys(apiMessage.data.allowed_mentions).length === 0){
-			apiMessage.data.allowed_mentions = { parse: ["users", "roles", "everyone"] };
+		apiMessage.data.allowed_mentions = { parse: ["users", "roles", "everyone"] };
         };
 
         if (typeof apiMessage.data.allowed_mentions.replied_user === "undefined"){
-            Object.assign(apiMessage.data.allowed_mentions, { replied_user: mentionRepliedUser });
+        	Object.assign(apiMessage.data.allowed_mentions, { replied_user: mentionRepliedUser });
         };
 
         if (Array.isArray(apiMessage.data.content)) {
@@ -188,9 +188,9 @@ client.on('message', async(message) => {
 			};
 		} else if (subcommand.toLowerCase() === 'sync'){
 			syncCommand()
-		    .then(() => message.reply('SYNCED COMMANDS FROM DATABASE~!'))
-		    .catch(error => message.reply(`Unable to Sync Commands: ${error.message}`));
-	    } else {
+			.then(() => message.reply('SYNCED COMMANDS FROM DATABASE~!'))
+			.catch(error => message.reply(`Unable to Sync Commands: ${error.message}`));
+	    	} else {
 			return message.reply('INVALID SUBCOMMAND: Subcommand must be one of the following: `add`, `delete`, or `edit`');
 		};
 	};
@@ -206,8 +206,8 @@ client.ws.on('INTERACTION_CREATE', async interaction => {
 			data = { ...messageData, files };
 		};
 		if (ephemeral === true && data.content){
-          data.flags = 1 << 6;
-        };
+			data.flags = 1 << 6;
+		};
 		return client.api.interactions(interaction.id, interaction.token).callback.post({ data: { type: 4, data }});
 	};
 	const command = client.commands.get(interaction.data.name);
